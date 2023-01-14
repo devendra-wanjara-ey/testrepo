@@ -1,0 +1,17 @@
+{
+    "tokenId": 1,
+    "name": "Beaver NFT #1",
+    "description": "Beaver NFTs are great",
+    "image": "https://raw.githubusercontent.com/devendra-wanjara-ey/testrepo/main/assets/Team2NFT_1.jpg",
+    "external_url": "https://github.com/devendra-wanjara-ey/testrepo",
+    "attributes": [
+        {
+            "trait_type": "Hardworking",
+            "value": 100
+        },
+        {
+            "trait_type": "Efficient",
+            "value": 30
+        }
+    ]
+}
