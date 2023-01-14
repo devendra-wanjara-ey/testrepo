@@ -22,9 +22,11 @@ function App() {
 
         //const web3 = new Web3("https://rinkeby.infura.io/v3/d4ed4c25a40645bd95f4d33bc7cd0925");
         const web3 = new Web3("http://127.0.0.1:9545/");
+	console.log(Team2NFTAbi);
         const contract = new web3.eth.Contract(Team2NFTAbi as any, "0x3dB0f096B559428d47eC8c6426c27050f2333103");
 
         const balance = await contract.methods.balanceOf(address).call();
+	console.log(balance);
 
         const newNfts: Team2NFT[] = [];
         for (let ix = 0; ix < balance; ix++) {
@@ -58,7 +60,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1 className='mt-3'>Our cool Team2 NFT viewer</h1>
+      <h1 className='mt-3'>Our cool Web Team2 NFT viewer</h1>
       <label>Address of the user ... that has alllll the NFTs</label>
       <input type="text"
         className={`form-control ${isValid ? '' : 'is-invalid'}`}
