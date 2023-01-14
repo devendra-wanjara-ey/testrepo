@@ -1,5 +1,5 @@
 export const Team2NFTAbi = [
-    {
+    { 
       "inputs": [],
       "stateMutability": "nonpayable",
       "type": "constructor"
