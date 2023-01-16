@@ -7,11 +7,11 @@
     "attributes": [
         {
             "trait_type": "Programming",
-            "value": "Java"
+            "value": Java
         },
         {
             "trait_type": "Skills",
-            "value": "Solidity"
+            "value": 20
         }
     ]
 }
