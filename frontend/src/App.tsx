@@ -23,7 +23,7 @@ function App() {
         //const web3 = new Web3("https://rinkeby.infura.io/v3/d4ed4c25a40645bd95f4d33bc7cd0925");
         const web3 = new Web3("http://127.0.0.1:9545/");
 	console.log(Team2NFTAbi);
-        const contract = new web3.eth.Contract(Team2NFTAbi as any, "0x3dB0f096B559428d47eC8c6426c27050f2333103");
+        const contract = new web3.eth.Contract(Team2NFTAbi as any, "0xBF8Be22E3463EA4563F8CF1179e0Ceb12E4Aa658");
 
         const balance = await contract.methods.balanceOf(address).call();
 	console.log(balance);
