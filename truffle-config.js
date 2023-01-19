@@ -6,14 +6,15 @@ module.exports = {
     development: {
       host: "127.0.0.1",
       port: 8545,
-      network_id: "*" // Match any network id
+      network_id: "*", // Match any network id
+      total_accounts:30
     },
   },
-  //contracts_directory: './src/contracts/',
+  
   contracts_build_directory: './build/abis/',
   compilers: {
     solc: {
-      version: "0.8.10", // Fetch exact version from solc-bin (default: truffle's version)
+      version: "0.8.4", // Fetch exact version from solc-bin (default: truffle's version)
       optimizer: {
         enabled: true,
         runs: 200

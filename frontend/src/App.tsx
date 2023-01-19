@@ -19,11 +19,10 @@ function App() {
   useEffect(() => {
     if (isValid) {
       const fetchData = async () => {
-
-        //const web3 = new Web3("https://rinkeby.infura.io/v3/d4ed4c25a40645bd95f4d33bc7cd0925");
+        
         const web3 = new Web3("http://127.0.0.1:9545/");
 	console.log(Team2NFTAbi);
-        const contract = new web3.eth.Contract(Team2NFTAbi as any, "0xBF8Be22E3463EA4563F8CF1179e0Ceb12E4Aa658");
+        const contract = new web3.eth.Contract(Team2NFTAbi as any, "0x4080867b3941dC20977828025326B6364F2Be70B");
 
         const balance = await contract.methods.balanceOf(address).call();
 	console.log(balance);
@@ -31,7 +30,8 @@ function App() {
         const newNfts: Team2NFT[] = [];
         for (let ix = 0; ix < balance; ix++) {
           const tokenId = await contract.methods.tokenOfOwnerByIndex(address, ix).call();
-          const tokenURI = await contract.methods.tokenURI(tokenId).call();
+          //const tokenURI = await contract.methods.tokenURI(tokenId).call();
+          const tokenURI = await contract.methods.tokenURI(ix).call();
           const metadataResponse = await fetch(tokenURI);
           const metadata = await metadataResponse.json();
           console.log(metadata);
