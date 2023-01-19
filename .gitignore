@@ -1,0 +1,6 @@
+node_modules
+Untitled-1.js
+build/abis/*
+*.bak
+frontend/src/SearchText.tsx
+scripts/run.js
