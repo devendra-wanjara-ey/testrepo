@@ -3,6 +3,7 @@ import Web3 from 'web3';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Team2NFTAbi } from './Team2NFTAbi';
+import { Team2NFTV1Abi } from './Team2NFTV1Abi';
 
 interface Team2NFT {
   tokenId: string
@@ -20,9 +21,9 @@ function App() {
     if (isValid) {
       const fetchData = async () => {
         
-        const web3 = new Web3("http://127.0.0.1:9545/");
+        const web3 = new Web3("http://127.0.0.1:8545/");
 	console.log(Team2NFTAbi);
-        const contract = new web3.eth.Contract(Team2NFTAbi as any, "0x4080867b3941dC20977828025326B6364F2Be70B");
+        const contract = new web3.eth.Contract(Team2NFTV1Abi as any, "0xEF00f4944a631047D60C7B470D7C2BE3b8d2BE3e");
 
         const balance = await contract.methods.balanceOf(address).call();
 	console.log(balance);
