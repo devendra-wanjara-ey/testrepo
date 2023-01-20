@@ -16,7 +16,7 @@ function App() {
       <br></br>
       <Tabs>
         <div label="Search NFT">
-           Please add Search Screen !
+           Please add Search Screen !1
         </div>
         <div label="Mint NFT">
           <Minter/>

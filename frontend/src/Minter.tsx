@@ -530,7 +530,7 @@ function Minter() {
           }
         ], SMART_CONTRACT);
         console.log("add >"+address) 
-        contract.methods.mint1().send({ from: account})
+        contract.methods.mint(SMART_CONTRACT).send({ from: account})
         
     }catch(ex){
       console.log(ex)
