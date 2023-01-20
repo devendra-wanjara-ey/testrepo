@@ -26,6 +26,7 @@ function Minter() {
   const [primarySkill, setPrimarySkill] = useState('');
   const [secondarySkill, setSecondarySkill] = useState('');
   const [empId, setEmpId] = useState('');
+  const [location, setLocation] = useState('');
   const [ntfs, setNfts] = useState<Team2NFT[]>([]);
 
   const handleContractChange = async () => {
@@ -44,16 +45,33 @@ function Minter() {
   };
 
   const mint = async() => {
-    try{
-        
+  
         const web3 = new Web3(window.ethereum);
 	      const contract = new web3.eth.Contract(Team2NFTV1Abi as any, SMART_CONTRACT);
         console.log("add >"+address) 
-        contract.methods.mint(account).send({ from: account})
+
+        const data = await contract.methods.mint(address).encodeABI();
+
+        console.log("data >>"+data);
+
+
+        const params = {
+            from: address,
+            to: SMART_CONTRACT,
+            data: data,
+            tokenURI : "{name:'TEST1'}"
+        };
         
-    }catch(ex){
-      console.log(ex)
-    }
+        console.log("params >>"+params);
+
+        window.ethereum.request({
+            method: 'eth_sendTransaction',
+            params: [params]
+        }).then((res: string) => {
+            console.log("res >>"+res);
+        });
+
+      
   }
 
 
@@ -92,19 +110,26 @@ function Minter() {
           &nbsp;<input
           type="text"
           placeholder="XXXXX" value={empId}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setEmpId(e.target.value)}
         />
         </h2>
         <h2>Primary Skills: 
             &nbsp;<input
           type="text" value ={primarySkill}
-          placeholder="e.g. UI/ Backend / Manager etc." onChange={(e) => setName(e.target.value)}
+          placeholder="e.g. UI/ Backend / Manager etc." onChange={(e) => setPrimarySkill(e.target.value)}
         />
         </h2>
         <h2>Secondary Skills: 
             &nbsp;<input
           type="text" value ={secondarySkill}
-          placeholder="e.g. UI/ Backend / Manager etc." onChange={(e) => setName(e.target.value)}
+          placeholder="e.g. UI/ Backend / Manager etc." onChange={(e) => setSecondarySkill(e.target.value)}
+        />
+        </h2>
+
+        <h2>Location: 
+            &nbsp;<input
+          type="text" value ={location}
+          placeholder="Texas" onChange={(e) => setLocation(e.target.value)}
         />
         </h2>
   
