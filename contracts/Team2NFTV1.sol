@@ -19,14 +19,36 @@ contract Team2NFTV1 is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, tokenURI(tokenId));
+    } 
+
+    function getTotalSupply() 
+    public
+    view
+    returns (uint256)
+    {
+         uint256 supply = totalSupply();
+         return supply;
+    }
+
+    function getNextTokenId() 
+    public  
+    view
+    returns (uint256 )
+    {  
+        uint256 _tokenId = _tokenIdCounter.current();        
+        return _tokenId;
     }   
 
-    function mint(address to) public  {
+
+    function mint(address to) public 
+    returns (uint256 )
+     {
         require(balanceOf(to) == 0, "Max Mint per wallet reached");
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _mint(to, totalSupply());
         _setTokenURI(tokenId, tokenURI(tokenId));
+        return tokenId;
     }
 
     // The following functions are overrides required by Solidity.
