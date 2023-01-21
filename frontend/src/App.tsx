@@ -2,18 +2,19 @@
 import './App.css';
 import Minter from './Minter'
 import Tabs from './components/Tabs';
+import Header from './components/Header';
 declare module 'react' {
   interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
     // extends React's HTMLAttributes
     label?: string;
+    class?:string
   }
 }
 
 function App() {
   return (
-    <div>
-      <h1>NFT Team 2</h1>
-      <br></br>
+    <div >
+     <Header/>
       <Tabs>
         <div label="Search NFT">
            Please add Search Screen !1

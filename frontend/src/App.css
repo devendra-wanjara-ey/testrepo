@@ -1,5 +1,5 @@
 .tab-list {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 2px solid #ccc;
     padding-left: 0;
   }
   
@@ -8,10 +8,47 @@
     list-style: none;
     margin-bottom: -1px;
     padding: 0.5rem 0.75rem;
+    font-family: Arial;
+    font-size: medium;
   }
   
   .tab-list-active {
-    background-color: white;
-    border: solid #ccc;
+    background-color: whitesmoke;
+    border: solid rgb(204, 204, 204);
     border-width: 1px 1px 0 1px;
+    font-family: Arial;
+    font-size: medium;
+  }
+
+  .header {
+    text-align: left;
+    background: yellow;
+  }
+  .header img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .tabs {
+    background-color: white;
+    font-family: Arial;
+    font-size: medium;
+  }
+
+  .header-mint{
+    text-align: center;
+  } 
+
+  .div-mint{
+    text-align: center;
+    
+  } 
+
+  .Tab-Content{
+    
+    background-repeat: no-repeat;
+  }
+
+  .text{
+   width: 300px;
   }

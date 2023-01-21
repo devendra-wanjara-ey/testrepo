@@ -587,24 +587,21 @@ function Minter() {
 
       
   }
-
-
-
-
-  
   return (
     <div className="Minter" >
-       <h1  id="title">Team 2 - NFT Minter</h1>
-     <div >
-       <br></br>
+       <h1  id="title" className="header-mint">NFT Minter</h1>
+     <div  className="header-mint">
+       
         <button  onClick={() => handleContractChange()}>
           Connect Wallet  
         </button>
+        <br></br>
         {address.length>0 && 
-           <p>Connected to the address:   
-           {address}</p>
+           <p>Connected to the address: &nbsp;  
+           <b>{address}</b></p>
         }
       </div>
+      <div  className="div-mint">
       <form>
       
       <br></br>
@@ -613,46 +610,48 @@ function Minter() {
         Simply add your name, skills then press "Mint."
       </p>
      
-        <h2 >Name: 
-          &nbsp;<input required
+       <p>* Name: 
+          &nbsp;<input required className="text"
           type="text"
           placeholder="e.g. NFT Mr. Doe" value={name}
           onChange={(e) => setName(e.target.value)}
-        />
-        </h2>
-        <h2 >Employee ID: 
-          &nbsp;<input required 
+        /></p>
+       
+        <p>*Employee ID: 
+          &nbsp;<input required className="text"
           type="text"
           placeholder="XXXXX" value={empId}
           onChange={(e) => setEmpId(e.target.value)}
         />
-        </h2>
-        <h2>Primary Skills: 
-            &nbsp;<input
+        </p>
+        
+        <p>Primary Skills: 
+            &nbsp;<input className="text"
           type="text" value ={primarySkill}
           placeholder="e.g. UI/ Backend " onChange={(e) => setPrimarySkill(e.target.value)}
         />
-        </h2>
-        <h2>Secondary Skills: 
-            &nbsp;<input
+        </p>
+        <p>Secondary Skills: 
+            &nbsp;<input className="text"
           type="text" value ={secondarySkill}
           placeholder="e.g. UI/ Backend " onChange={(e) => setSecondarySkill(e.target.value)}
         />
-        </h2>
+        </p>
 
-        <h2>Location: 
-            &nbsp;<input
+        <p>Location: 
+            &nbsp;<input className="text"
           type="text" value ={location}
           placeholder="Texas" onChange={(e) => setLocation(e.target.value)}
         />
-        </h2>
+        </p>
   
         </form>
+       
         <button id="mint" onClick={() => mint()}>
           Mint
         </button>
    
- 
+        </div>
         
     </div>
    
