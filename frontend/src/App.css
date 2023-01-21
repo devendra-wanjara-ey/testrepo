@@ -15,3 +15,17 @@
     border: solid #ccc;
     border-width: 1px 1px 0 1px;
   }
+
+  .title {
+    padding: 10px;
+  }
+
+  .title-width {
+    width: 50%;
+  }
+
+  .img-size {
+    height: 80px;
+    width: 160px;
+  }
+
