@@ -6,12 +6,24 @@
     "external_url": "https://github.com/devendra-wanjara-ey/testrepo",
     "attributes": [
         {
-            "trait_type": "Hardworking",
-            "value": 100
+            "trait_type": "name",
+            "value": "Mr. Doe"
         },
         {
-            "trait_type": "Efficient",
-            "value": 20
+            "trait_type": "empId",
+            "value": 21
+        },
+        {
+            "trait_type": "primarySkill",
+            "value": "UI"
+        },
+        {
+            "trait_type": "secondarySkill",
+            "value": "Cloud"
+        },
+        {
+            "trait_type": "secondarySkill",
+            "value": "New York"
         }
     ]
 }
