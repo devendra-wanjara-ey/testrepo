@@ -22,7 +22,7 @@
             "value": "Cloud"
         },
         {
-            "trait_type": "secondarySkill",
+            "trait_type": "Location",
             "value": "New York"
         }
     ]

@@ -8,9 +8,12 @@ import { Team2NFTAbi } from './Team2NFTAbi';
 
 
 interface Team2NFT {
-  tokenId: string
+  tokenId: string,
+  name: string,
+  description: string,
   image: string,
-  traits: Record<string, number>
+  external_url: string,
+  attributes: any[]
 }
 
 function App1() {
@@ -18,37 +21,45 @@ function App1() {
   const [ntfs, setNfts] = useState<Team2NFT[]>([]);
   const [loading, setLoading] = useState(true);
   const isValid = Web3.utils.isAddress(address);
+  const SMART_CONTRACT = "0x4080867b3941dC20977828025326B6364F2Be70B";
+  const TEST_NETWORK = "http://127.0.0.1:9545/";
 
   useEffect(() => {
     if (isValid) {
       const fetchData = async () => {
 
         //const web3 = new Web3("https://rinkeby.infura.io/v3/d4ed4c25a40645bd95f4d33bc7cd0925");
-        const web3 = new Web3("http://127.0.0.1:9545/");
+        const web3 = new Web3(TEST_NETWORK);
 	console.log(Team2NFTV1Abi);
-        const contract = new web3.eth.Contract(Team2NFTV1Abi as any, "0xf73427FA6e4270e60F78531eA21dB9019c039E41");
+    const contract = new web3.eth.Contract(Team2NFTV1Abi as any, SMART_CONTRACT);
+    const balance = await contract.methods.totalSupply().call();
+    console.log(balance);
 
-        const balance = await contract.methods.balanceOf(address).call();
-	console.log(balance);
-
-        const newNfts: Team2NFT[] = [];
-        for (let ix = 0; ix < balance; ix++) {
-          const tokenId = await contract.methods.tokenOfOwnerByIndex(address, ix).call();
+    const newNfts: Team2NFT[] = [];
+    for (let ix = 0; ix < balance; ix++) {
+      //console.log("DEBUG1")
+      //const tokenId = await contract.methods.tokenOfOwnerByIndex(address, ix).call();          
+          const tokenId = await contract.methods.tokenByIndex(ix).call();
+      //console.log("DEBUG2")
           const tokenURI = await contract.methods.tokenURI(tokenId).call();
           const metadataResponse = await fetch(tokenURI);
           const metadata = await metadataResponse.json();
           console.log(metadata);
 
-          const traits: Record<string, number> = {};
+          const traits: any[] = [];
 
           for (const attribute of metadata.attributes) {
-            traits[attribute.trait_type] = attribute.value;
+            //traits[attribute.trait_type] = attribute.value;
+            traits.push({trait_type: attribute.trait_type, value: attribute.value });
           }
 
           newNfts.push({
-            tokenId,
+            tokenId: tokenId,
+            name: '',
+            description: '',
             image: metadata.image,
-            traits,
+            external_url: '',
+            attributes: traits,
           })
         }
 
@@ -82,13 +93,18 @@ function App1() {
               {ntfs.map(nft => <div className='col-4 border'>
                 <h5>#{nft.tokenId}</h5>
                 <img src={nft.image} alt='cleaver' className='w-100' />
-
                 <div className='row'>
                   <div className='col'>
-                    H: {nft.traits.Hardworking}
-                  </div>
-                  <div className='col'>
-                    E: {nft.traits.Efficient}
+                      {
+                        nft.attributes.map(attr => {
+                          return (
+                            <div>
+                                <div>{attr.trait_type}</div>
+                                <div>{attr.value}</div>
+                            </div>
+                          );
+                        })
+                      }
                   </div>
                 </div>
               </div>)}
