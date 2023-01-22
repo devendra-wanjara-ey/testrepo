@@ -54,7 +54,6 @@ export class Login extends Component {
     }
 
   }
-
   loginForm = () => {
     return(
       <div className='login-size'>

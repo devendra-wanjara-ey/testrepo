@@ -16,8 +16,7 @@ function Search() {
 
   const [searchText, setSearchText] = useState("");
   const [data, setData] = useState(ntfs);
-  const excludeColumns = ["id", "color"];
-
+  const [newNfts, setnewNfts] = useState([]);
 
   useEffect(() => {
     if (true) {
@@ -30,7 +29,7 @@ function Search() {
     const balance = await contract.methods.totalSupply().call();
     console.log(balance);
 
-    const newNfts = [];
+  //  const newNfts = [];
     for (let ix = 0; ix < balance; ix++) {
       //console.log("DEBUG1")
       //const tokenId = await contract.methods.tokenOfOwnerByIndex(address, ix).call();          
@@ -45,7 +44,7 @@ function Search() {
 
           for (const attribute of metadata.attributes) {
             //traits[attribute.trait_type] = attribute.value;
-            traits.push({trait_type: attribute.trait_type, value: attribute.value });
+            traits.push({trait_type: attribute.trait_type, value: ' ' + attribute.value });
           }
 
           newNfts.push({
@@ -68,125 +67,6 @@ function Search() {
     }
   }, [address, isValid])
 
-    const dataList = [
-    {
-      "tokenId": 1,
-      "name": "Team2 NFT #0",
-      "description": "Team2  NFTs are great",
-      "image": "https://raw.githubusercontent.com/devendra-wanjara-ey/testrepo/main/assets/Team2NFT_0.jpg",
-      "external_url": "https://github.com/devendra-wanjara-ey/testrepo",
-      "attributes": [
-        {
-            "trait_type": "name",
-            "value": "Mr. XXX"
-        },
-        {
-            "trait_type": "empId",
-            "value": 23
-        },
-        {
-            "trait_type": "primarySkill",
-            "value": "DB"
-        },
-        {
-            "trait_type": "secondarySkill",
-            "value": "Micro Services"
-        },
-        {
-            "trait_type": "secondarySkill",
-            "value": "California"
-        }
-       ]
-    },
-    {
-        "tokenId": 1,
-        "name": "Team2 NFT #1",
-        "description": "Team2 NFTs are great",
-        "image": "https://raw.githubusercontent.com/devendra-wanjara-ey/testrepo/main/assets/Team2NFT_1.jpg",
-        "external_url": "https://github.com/devendra-wanjara-ey/testrepo",
-        "attributes": [
-            {
-                "trait_type": "name",
-                "value": "Mr. Joe"
-            },
-            {
-                "trait_type": "empId",
-                "value": 22
-            },
-            {
-                "trait_type": "primarySkill",
-                "value": "Cloud"
-            },
-            {
-                "trait_type": "secondarySkill",
-                "value": "Micro Services"
-            },
-            {
-                "trait_type": "secondarySkill",
-                "value": "California"
-            }
-        ]
-    },
-    {
-        "tokenId": 2,
-        "name": "Team2 NFT #2",
-        "description": "Team2 NFTs are great",
-        "image": "https://raw.githubusercontent.com/devendra-wanjara-ey/testrepo/main/assets/Team2NFT_2.jpg",
-        "external_url": "https://github.com/devendra-wanjara-ey/testrepo",
-        "attributes": [
-            {
-                "trait_type": "name",
-                "value": "Mr. Doe"
-            },
-            {
-                "trait_type": "empId",
-                "value": 21
-            },
-            {
-                "trait_type": "primarySkill",
-                "value": "UI"
-            },
-            {
-                "trait_type": "secondarySkill",
-                "value": "Cloud"
-            },
-            {
-                "trait_type": "secondarySkill",
-                "value": "New York"
-            }
-        ]
-    },
-    {
-        "tokenId": 3,
-        "name": "Team2 NFT #3",
-        "description": "Team2 NFTs are great",
-        "image": "https://raw.githubusercontent.com/devendra-wanjara-ey/testrepo/main/assets/Team2NFT_3.jpg",
-        "external_url": "https://github.com/devendra-wanjara-ey/testrepo",
-        "attributes": [
-            {
-                "trait_type": "name",
-                "value": "Test 1"
-            },
-            {
-                "trait_type": "empId",
-                "value": 20
-            },
-            {
-                "trait_type": "primarySkill",
-                "value": "Java"
-            },
-            {
-                "trait_type": "secondarySkill",
-                "value": "UI"
-            },
-            {
-                "trait_type": "secondarySkill",
-                "value": "Texa"
-            }
-        ]
-    }];
-  
- 
   
   
   const handleChange = (value) => {
@@ -195,16 +75,36 @@ function Search() {
   };
   
   const filterData = (value) => {
+    console.log(ntfs);
+    console.log(newNfts);
     const lowercasedValue = value.toLowerCase().trim();
-    if (lowercasedValue === "") setData(data);
+    if (lowercasedValue === "") setData(newNfts);
     else {
-      const filteredData = data.filter(item => {
-        return Object.keys(item).some(key => {
-            return excludeColumns.includes(key) ? false : item[key].toString().toLowerCase().includes(lowercasedValue);
-        }
-        );
+        var returnValues = [];
+       
+      const filteredData = newNfts.filter(item => {
+       
+        item['attributes'].forEach(element => {
+            var localValue = element['value'];
+            if (isNaN(localValue)) {
+                if (localValue.toLowerCase().includes(lowercasedValue)) {
+                    returnValues.push(item);
+                }
+            } else {
+                var toCampare = localValue.toString();
+                if (toCampare.toLowerCase().includes(lowercasedValue)) {
+                    returnValues.push(item);
+                }
+            }
+           
+        });
+
+
+
+        return returnValues;
+        
       });
-      setData(filteredData);
+      setData(returnValues);
     }
   }
 
@@ -219,7 +119,7 @@ function Search() {
       value={searchText}
       onChange={e => handleChange(e.target.value)}
     />
-    <div className="box-container title">
+    <div className="box-container ">
       {data.map((d, i) => {
         return <div key={i} className="box title title-width " >
           <div className="parent-search" style={{ backgroundColor: '#98B2D1' }}>
