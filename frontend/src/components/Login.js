@@ -15,8 +15,11 @@ export class Login extends Component {
       password: '',
       loginSuccessfull: false,
       message: '',
+      present: true
     }
   }
+
+
 
   nextPage = () => {
     return(
@@ -48,9 +51,13 @@ export class Login extends Component {
 
     if ((this.state.name == 'omar' || this.state.name == 'devendra') && this.state.password == 'test123') {
       this.setState({loginSuccessfull: true});
-      this.setState({message: <Alert type="success" title="Successfully logged in"/>});
+      this.setState({message: <Alert type="success" isRemoveable="true" title="Successfully logged in"/>});
+      const timeout = setTimeout(() => {
+        this.setState({present: false})
+      }, 1200)
+
     } else {
-      this.setState({message: <Alert type="danger" title="Invalid Login details"/>})
+      this.setState({message: <Alert type="danger"  title="Invalid Login details"/>})
     }
 
   }
@@ -82,7 +89,7 @@ export class Login extends Component {
       let content = (this.state.loginSuccessfull) ? this.nextPage() : this.loginForm();
       return(
         <div>
-          {this.state.message}
+          {this.state.present ? this.state.message : '' }
           {content}
         </div>
       );

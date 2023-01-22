@@ -119,7 +119,7 @@ function Search() {
       value={searchText}
       onChange={e => handleChange(e.target.value)}
     />
-    <div className="box-container ">
+    <div className="box-container  search-box">
       {data.map((d, i) => {
         return <div key={i} className="box title title-width " >
           <div className="parent-search" style={{ backgroundColor: '#98B2D1' }}>
