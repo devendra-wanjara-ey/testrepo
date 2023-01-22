@@ -15,3 +15,34 @@
     border: solid #ccc;
     border-width: 1px 1px 0 1px;
   }
+
+  .title {
+    padding: 10px;
+  }
+
+  .title-width {
+    width: 90%;
+  }
+
+  .img-size {
+    height: 120px;
+    width: 120px;
+  }
+
+  .parent-search {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    justify-content: left;
+  }
+
+  .login-size {
+    width: 400px;
+    height: 400px;
+    margin: 20px;
+    background-color: lightgray;
+  }
+
+  

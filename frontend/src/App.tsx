@@ -1,7 +1,9 @@
 import './App.css';
-import Minter from './Minter'
-import App1 from './App1'
+import Minter from './Minter';
+import App1 from './App1';
 import Tabs from './components/Tabs';
+import Search from './components/Search';
+import  Login  from './components/Login';
 import Header from './components/Header';
 declare module 'react' {
 
@@ -18,19 +20,23 @@ declare module 'react' {
 function App() {
   return (
     <div>
+      {/* <h1>NFT Team 2</h1>
+      <br></br>
        <Header/>
       <Tabs>
       <div label="Main">
            <App1/>
         </div>
         <div label="Search NFT">
-           Please add Search 
+           <Search/>
         </div>
         <div label="Mint NFT">
           <Minter/>
         </div>
-        
-      </Tabs>
+      </Tabs> */}
+      <div>
+        <Login componentName="LoginComponent" />
+      </div>
     </div>
   );
 }
