@@ -4,7 +4,6 @@ import App1 from './App1';
 import Tabs from './components/Tabs';
 import Search from './components/Search';
 import  Login  from './components/Login';
-
 import Header from './components/Header';
 declare module 'react' {
 
