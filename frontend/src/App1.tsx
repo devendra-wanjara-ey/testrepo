@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Web3 from 'web3';
-import './App.css';
+import './App1.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Team2NFTV1Abi } from './Team2NFTV1Abi';
 import { Team2NFTAbi } from './Team2NFTAbi';
-
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 
 interface Team2NFT {
@@ -23,36 +24,59 @@ function App1() {
   const isValid = Web3.utils.isAddress(address);
   const SMART_CONTRACT = "0x4080867b3941dC20977828025326B6364F2Be70B";
   const TEST_NETWORK = "http://127.0.0.1:9545/";
+  
+  const [name, setName] = useState('');
+  const [primarySkill, setPrimarySkill] = useState('');
+  const [secondarySkill, setSecondarySkill] = useState('');
+  const [empId, setEmpId] = useState('');
+  const [location, setLocation] = useState('');
+  
+
+  
 
   useEffect(() => {
-    if (isValid) {
+    if (true) {
       const fetchData = async () => {
 
-        //const web3 = new Web3("https://rinkeby.infura.io/v3/d4ed4c25a40645bd95f4d33bc7cd0925");
-        const web3 = new Web3(TEST_NETWORK);
-	console.log(Team2NFTV1Abi);
+    //const web3 = new Web3("https://rinkeby.infura.io/v3/d4ed4c25a40645bd95f4d33bc7cd0925");
+    const web3 = new Web3(TEST_NETWORK);
+    // const jsonObj = {
+    //   name: {name},
+    //   empId: {empId},
+    //   primarySkill: {primarySkill},
+    //   secondarySkill: {secondarySkill},
+    //   location:{location}
+    // }
+	  console.log(Team2NFTV1Abi);
     const contract = new web3.eth.Contract(Team2NFTV1Abi as any, SMART_CONTRACT);
     const balance = await contract.methods.totalSupply().call();
     console.log(balance);
 
     const newNfts: Team2NFT[] = [];
-    for (let ix = 0; ix < balance; ix++) {
-      //console.log("DEBUG1")
+    for (let ix = 0; ix < balance; ix++) {      
       //const tokenId = await contract.methods.tokenOfOwnerByIndex(address, ix).call();          
-          const tokenId = await contract.methods.tokenByIndex(ix).call();
-      //console.log("DEBUG2")
+          const tokenId = await contract.methods.tokenByIndex(ix).call();      
           const tokenURI = await contract.methods.tokenURI(tokenId).call();
           const metadataResponse = await fetch(tokenURI);
-          const metadata = await metadataResponse.json();
+          const metadata = await metadataResponse.json();          
+          //var saved: string = localStorage.getItem(tokenURI)?.toString;
+          //console.log(saved);
+          
+          const initialValue = JSON.parse(localStorage.getItem(tokenURI) || '{}');
+          console.log(initialValue);
+          //return initialValue || "";
           console.log(metadata);
 
           const traits: any[] = [];
+          const initVal: any[] = [];
 
           for (const attribute of metadata.attributes) {
             //traits[attribute.trait_type] = attribute.value;
-            traits.push({trait_type: attribute.trait_type, value: attribute.value });
+           // traits.push({trait_type: attribute.trait_type, value: attribute.value });
+          // traits.push({trait_type: attribute.trait_type, value: attribute.value });
+           
           }
-
+          traits.push([initialValue]);
           newNfts.push({
             tokenId: tokenId,
             name: '',
@@ -74,43 +98,51 @@ function App1() {
 
   return (
     <div className="container">
-      <h1 className='mt-3'>Our cool Web Team2 NFT viewer</h1>
-      <label>Address of the user ... that has alllll the NFTs</label>
-      <input type="text"
+      <h1 className='mt-3'>Our cool Web Team 2 NFT viewer</h1>
+      <label>All NFT token issued are listed below</label>
+      {/* <input type="text"
         className={`form-control ${isValid ? '' : 'is-invalid'}`}
         value={address}
         onChange={e => setAddress(e.target.value)}
-      />
+      /> */}
 
-      {isValid && <div className='mt-5'>
-        <h3>These are all the cool NFTs</h3>
-
-        {loading
-          ? <p className='text-muted'>Loading ...</p>
-          : <div>
+<div>
             <p className='text-muted'>The address <span className='text-primary'>{address}</span> has <span className='text-primary'>{ntfs.length}</span> NFTs</p>
             <div className='row'>
               {ntfs.map(nft => <div className='col-4 border'>
-                <h5>#{nft.tokenId}</h5>
-                <img src={nft.image} alt='cleaver' className='w-100' />
+                <h5>#{nft.tokenId}</h5>                
                 <div className='row'>
                   <div className='col'>
-                      {
+                  <div className='App1'>
+           
+    <Card style={{ width: '15rem' }}>
+      <Card.Img variant="top" src={nft.image} />
+      
+      <Card.Body>
+        <Card.Title>Details</Card.Title>
+        <Card.Text> {
                         nft.attributes.map(attr => {
                           return (
                             <div>
-                                <div>{attr.trait_type}</div>
-                                <div>{attr.value}</div>
-                            </div>
+                            <div>Name:{attr[0].name} Id: {attr[0].empId}</div>                            
+                            <div>{attr[0].primarySkill} {attr[0].secondarySkill}</div>                            
+                            <div>{attr[0].location}</div>
+                        </div>
                           );
                         })
                       }
+        </Card.Text>
+        <Button variant="primary">Go somewhere</Button>
+      </Card.Body>
+    </Card>
+                     
+                      </div>
                   </div>
                 </div>
               </div>)}
             </div>
-          </div>}
-      </div>}
+          </div>
+     
 
     </div>
   );

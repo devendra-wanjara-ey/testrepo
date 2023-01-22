@@ -55,12 +55,7 @@ function Minter() {
   
 
   const mint = async() => {
-  
-
-   var tokenID = Math.floor(Math.random()*10);
-   const token = "https://raw.githubusercontent.com/devendra-wanjara-ey/testrepo/main/assets/Team2NFT_"
-  +tokenID+".json"
-    console.log(tokenID)
+   
     if(address == ''){
     alert("Please Connect the Wallet");
       return;
@@ -70,23 +65,37 @@ function Minter() {
       alert("Please enter Name and EmployeeID");
       return;
     }
-    const jsonObj = {
-      name: {name},
-      empId: {empId},
-      primarySkill: {primarySkill},
-      secondarySkill: {secondarySkill},
-      location:{location}
-    }
+    // const jsonObj = {
+    //   name: {name}.name,
+    //   empId: {empId}.empId,
+    //   primarySkill: {primarySkill}.primarySkill,
+    //   secondarySkill: {secondarySkill}.secondarySkill,
+    //   location:{location}.location
+    // }
    
+
+    const jsonObj = {
+        name: {name}.name,
+        empId: {empId}.empId,
+        primarySkill: {primarySkill}.primarySkill,
+        secondarySkill: {secondarySkill}.secondarySkill,
+        location:{location}.location
+      }
     
 
       const web3 = new Web3(window.ethereum);      
       contract = new web3.eth.Contract(Team2NFTV1Abi as any, SMART_CONTRACT);
       console.log("add >"+address) 
 
-     
+      var tokenID = await contract.methods.getNextTokenId().call();
+      console.log(tokenID);
       const data = await contract.methods.mint(address).encodeABI()
       console.log("data >>"+data);
+      
+      const token = "https://raw.githubusercontent.com/devendra-wanjara-ey/testrepo/main/assets/Team2NFT_"
+      +tokenID+".json"
+      
+      
 
 
       const params = {
