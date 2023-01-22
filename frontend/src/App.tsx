@@ -23,6 +23,7 @@ function App() {
     <div>
       {/* <h1>NFT Team 2</h1>
       <br></br>
+       <Header/>
       <Tabs>
       <div label="Main">
            <App1/>
