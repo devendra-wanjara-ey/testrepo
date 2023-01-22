@@ -2,6 +2,7 @@ import './App.css';
 import Minter from './Minter'
 import App1 from './App1'
 import Tabs from './components/Tabs';
+import Header from './components/Header';
 declare module 'react' {
 
   interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
@@ -17,12 +18,9 @@ declare module 'react' {
 function App() {
   return (
     <div>
-      <h1>NFT Team 2</h1>
-      <br></br>
+       <Header/>
       <Tabs>
-
       <div label="Main">
-           Please add Search 
            <App1/>
         </div>
         <div label="Search NFT">
