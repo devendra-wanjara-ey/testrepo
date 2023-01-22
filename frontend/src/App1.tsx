@@ -98,7 +98,7 @@ function App1() {
 
   return (
     <div className="container">
-      <h1 className='mt-3'>Our cool Web Team 2 NFT viewer</h1>
+      <h1 className='mt-3'>Web Team 2 NFT Viewer</h1>
       <label>All NFT token issued are listed below</label>
       {/* <input type="text"
         className={`form-control ${isValid ? '' : 'is-invalid'}`}
@@ -108,37 +108,31 @@ function App1() {
 
 <div>
             <p className='text-muted'>The address <span className='text-primary'>{address}</span> has <span className='text-primary'>{ntfs.length}</span> NFTs</p>
-            <div className='row'>
-              {ntfs.map(nft => <div className='col-4 border'>
-                <h5>#{nft.tokenId}</h5>                
-                <div className='row'>
-                  <div className='col'>
-                  <div className='App1'>
-           
-    <Card style={{ width: '15rem' }}>
-      <Card.Img variant="top" src={nft.image} />
-      
-      <Card.Body>
-        <Card.Title>Details</Card.Title>
-        <Card.Text> {
-                        nft.attributes.map(attr => {
-                          return (
-                            <div>
-                            <div>Name:{attr[0].name} Id: {attr[0].empId}</div>                            
-                            <div>{attr[0].primarySkill} {attr[0].secondarySkill}</div>                            
-                            <div>{attr[0].location}</div>
-                        </div>
-                          );
-                        })
-                      }
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
-    </Card>
+            <div className='row' style={{border:'5em' }}>
+              {ntfs.map(nft =>
+                 <div className='col-4 border'>
+                  <h5>#{nft.tokenId}</h5>                
+                  <Card   >
+                    <Card.Img  src={nft.image} style={{width:200, height:200 ,alignSelf:'center'}} />
+                    <Card.Body>
+                      <Card.Title>Details</Card.Title>
+                      <Card.Text> {
+                                      nft.attributes.map(attr => {
+                                        return (
+                                          <ui>
+                                            <li>Name: {attr[0].name}</li>
+                                            <li> Id: {attr[0].empId}</li>                            
+                                            <li>Skils : {attr[0].primarySkill} {attr[0].secondarySkill}</li>                            
+                                            <li>Localtion: {attr[0].location}</li>
+                                        </ui>
+                                        );
+                                      })
+                                    }
+                      </Card.Text>
+                     </Card.Body>
+                  </Card>
                      
-                      </div>
-                  </div>
-                </div>
+                   
               </div>)}
             </div>
           </div>

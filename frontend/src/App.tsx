@@ -5,6 +5,7 @@ import Tabs from './components/Tabs';
 import Search from './components/Search';
 import  Login  from './components/Login';
 
+import Header from './components/Header';
 declare module 'react' {
 
   interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
