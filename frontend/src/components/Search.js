@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from "react-dom/client";
-import { Team2NFTAbi } from '../Team2NFTAbi';
+import { Team2NFTV1Abi } from '../Team2NFTV1Abi';
 import Web3 from 'web3';
 
 import { Team2NFT } from "../App";
@@ -11,47 +11,58 @@ function Search() {
   const [ntfs, setNfts] = useState([]);
   const [loading, setLoading] = useState(true);
   const isValid = Web3.utils.isAddress(address);
+  const SMART_CONTRACT = "0x841A24C7a9B5454b7Ef5C389beD96C11e2F9Ed1E";
+  const TEST_NETWORK = "http://127.0.0.1:9545/";
+
+  const [searchText, setSearchText] = useState("");
+  const [data, setData] = useState(ntfs);
+  const excludeColumns = ["id", "color"];
+
 
   useEffect(() => {
     if (true) {
       const fetchData = async () => {
 
         //const web3 = new Web3("https://rinkeby.infura.io/v3/d4ed4c25a40645bd95f4d33bc7cd0925");
-        // add this one on a constant 
-        const web3 = new Web3("http://127.0.0.1:9545/");
-    console.log(Team2NFTAbi);
-        const contract = new web3.eth.Contract(Team2NFTAbi , "0x4080867b3941dC20977828025326B6364F2Be70B");
-
-        // number of tokens under that small contract 
-        console.log(address);
-        const balance = await contract.methods.balanceOf(address).call();
+        const web3 = new Web3(TEST_NETWORK);
+	console.log(Team2NFTV1Abi);
+    const contract = new web3.eth.Contract(Team2NFTV1Abi, SMART_CONTRACT);
+    const balance = await contract.methods.totalSupply().call();
     console.log(balance);
 
-        const newNfts = [];
-        for (let ix = 0; ix < balance; ix++) {
-          const tokenId = await contract.methods.tokenOfOwnerByIndex(address, ix).call();
-          //const tokenURI = await contract.methods.tokenURI(tokenId).call();
-          const tokenURI = await contract.methods.tokenURI(ix).call();
+    const newNfts = [];
+    for (let ix = 0; ix < balance; ix++) {
+      //console.log("DEBUG1")
+      //const tokenId = await contract.methods.tokenOfOwnerByIndex(address, ix).call();          
+          const tokenId = await contract.methods.tokenByIndex(ix).call();
+      //console.log("DEBUG2")
+          const tokenURI = await contract.methods.tokenURI(tokenId).call();
           const metadataResponse = await fetch(tokenURI);
           const metadata = await metadataResponse.json();
           console.log(metadata);
 
-          const traits  = {};
+          const traits = [];
 
           for (const attribute of metadata.attributes) {
-            traits[attribute.trait_type] = attribute.value;
+            //traits[attribute.trait_type] = attribute.value;
+            traits.push({trait_type: attribute.trait_type, value: attribute.value });
           }
 
           newNfts.push({
-            tokenId,
+            tokenId: tokenId,
+            name: '',
+            description: '',
             image: metadata.image,
-            traits,
+            external_url: '',
+            attributes: traits,
           })
         }
 
 
-        setNfts(newNfts)
+       // setNfts(newNfts);
         setLoading(false);
+        setData(newNfts);
+        console.log(newNfts);
       }
       fetchData();
     }
@@ -175,9 +186,7 @@ function Search() {
         ]
     }];
   
-  const [searchText, setSearchText] = useState("");
-  const [data, setData] = useState(dataList);
-  const excludeColumns = ["id", "color"];
+ 
   
   
   const handleChange = (value) => {
@@ -187,9 +196,9 @@ function Search() {
   
   const filterData = (value) => {
     const lowercasedValue = value.toLowerCase().trim();
-    if (lowercasedValue === "") setData(dataList);
+    if (lowercasedValue === "") setData(data);
     else {
-      const filteredData = dataList.filter(item => {
+      const filteredData = data.filter(item => {
         return Object.keys(item).some(key => {
             return excludeColumns.includes(key) ? false : item[key].toString().toLowerCase().includes(lowercasedValue);
         }
@@ -200,7 +209,8 @@ function Search() {
   }
 
     return (
-    <div className="App">
+     <div>
+        {loading ? <p >Loading ...</p> :     <div className="App">
       <div className="title">Search:</div>
      <input 
       style={{ marginLeft: 5 }}
@@ -212,31 +222,39 @@ function Search() {
     <div className="box-container title">
       {data.map((d, i) => {
         return <div key={i} className="box title title-width " >
-          <div  style={{ backgroundColor: '#98B2D1' }}>
-            <b>Name: </b>{d.name}<br />
+          <div className="parent-search" style={{ backgroundColor: '#98B2D1' }}>
+            {/* <b>Name: </b>{d.name}<br />
             <b>Description: </b>{d.description}<br />
             <b>External URL: </b>{d.external_url}<br />
-            <b>Tech Stack: </b>
-              {/* <div>  
+            <b>Tech Stack: </b> */}
+              <div><img src={d.image}  className='img-size' /></div>
+              <div>  
                 {
                     d.attributes.map(attr => {
                         return (
-                            <div>
+                            <div className="parent-search">
                                 <div>{attr.trait_type}</div>
                                 <div>{attr.value}</div>
                             </div>
                         );
                     })
                 }
-              </div> */}
+              </div>
           </div>
         </div>
       })}
       <div className="clearboth"></div>
       {data.length === 0 && <span>No records found to display!</span>}
     </div>
-    {address}
-  </div>
+  </div> }
+        
+     </div>
+
+
+
+
+        
+
   );
 }
 

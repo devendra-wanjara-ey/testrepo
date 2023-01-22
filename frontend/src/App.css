@@ -21,11 +21,28 @@
   }
 
   .title-width {
-    width: 50%;
+    width: 90%;
   }
 
   .img-size {
-    height: 80px;
-    width: 160px;
+    height: 120px;
+    width: 120px;
   }
 
+  .parent-search {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    justify-content: left;
+  }
+
+  .login-size {
+    width: 400px;
+    height: 400px;
+    margin: 20px;
+    background-color: lightgray;
+  }
+
+  

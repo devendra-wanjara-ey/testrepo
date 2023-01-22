@@ -21,11 +21,11 @@ function App1() {
   const [ntfs, setNfts] = useState<Team2NFT[]>([]);
   const [loading, setLoading] = useState(true);
   const isValid = Web3.utils.isAddress(address);
-  const SMART_CONTRACT = "0x4080867b3941dC20977828025326B6364F2Be70B";
+  const SMART_CONTRACT = "0x841A24C7a9B5454b7Ef5C389beD96C11e2F9Ed1E";
   const TEST_NETWORK = "http://127.0.0.1:9545/";
 
   useEffect(() => {
-    if (isValid) {
+    if (true) {
       const fetchData = async () => {
 
         //const web3 = new Web3("https://rinkeby.infura.io/v3/d4ed4c25a40645bd95f4d33bc7cd0925");
@@ -76,18 +76,13 @@ function App1() {
     <div className="container">
       <h1 className='mt-3'>Our cool Web Team2 NFT viewer</h1>
       <label>Address of the user ... that has alllll the NFTs</label>
-      <input type="text"
+      {/* <input type="text"
         className={`form-control ${isValid ? '' : 'is-invalid'}`}
         value={address}
         onChange={e => setAddress(e.target.value)}
-      />
+      /> */}
 
-      {isValid && <div className='mt-5'>
-        <h3>These are all the cool NFTs</h3>
-
-        {loading
-          ? <p className='text-muted'>Loading ...</p>
-          : <div>
+<div>
             <p className='text-muted'>The address <span className='text-primary'>{address}</span> has <span className='text-primary'>{ntfs.length}</span> NFTs</p>
             <div className='row'>
               {ntfs.map(nft => <div className='col-4 border'>
@@ -109,8 +104,8 @@ function App1() {
                 </div>
               </div>)}
             </div>
-          </div>}
-      </div>}
+          </div>
+     
 
     </div>
   );

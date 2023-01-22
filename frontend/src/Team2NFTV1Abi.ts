@@ -1,4 +1,4 @@
-export const Team2NFTV1Abi = [
+export const Team2NFTV1Abi =  [
   {
     "inputs": [],
     "stateMutability": "nonpayable",
@@ -519,4 +519,4 @@ export const Team2NFTV1Abi = [
     "type": "function",
     "constant": true
   }
- ];
+];
