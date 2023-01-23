@@ -22,7 +22,7 @@ function App1() {
   const [ntfs, setNfts] = useState<Team2NFT[]>([]);
   const [loading, setLoading] = useState(true);
   const isValid = Web3.utils.isAddress(address);
-  const SMART_CONTRACT = "0x841A24C7a9B5454b7Ef5C389beD96C11e2F9Ed1E";
+  const SMART_CONTRACT = "0x4080867b3941dC20977828025326B6364F2Be70B";
   const TEST_NETWORK = "http://127.0.0.1:9545/";
   
   const [name, setName] = useState('');
@@ -119,13 +119,30 @@ function App1() {
                       <Card.Text as="div"> {
                                       nft.attributes.map(attr => {
                                         return (
+<<<<<<< Updated upstream
                                          <div>
+=======
+<<<<<<< Updated upstream
+                                         <div>
+=======
+                                          <div>
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
                                             <li>Name: {attr[0].name}</li>
                                             <li> Id: {attr[0].empId}</li>
                                             <li>Skils : {attr[0].primarySkill} {attr[0].secondarySkill}</li>
                                             <li>Localtion: {attr[0].location}</li>
+<<<<<<< Updated upstream
                                           </div>
                                    
+=======
+<<<<<<< Updated upstream
+                                          </div>
+                                   
+=======
+                                        </div>
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
                                         );
                                       })
                                     }

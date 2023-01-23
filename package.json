@@ -26,7 +26,7 @@
     "solc": "^0.8.10",
     "truffle": "^5.7.3",
     "web-vitals": "^2.1.4",
-    "evergreen-ui": "3.2.4"
+    "evergreen-ui": "^7.0.1"
   },
   "scripts": {
     "start": "PORT=8080 react-scripts start",

@@ -6,9 +6,15 @@ module.exports = {
     development: {
       host: "127.0.0.1",
       port: 8545,
-      network_id: "*", // Match any network id
-      total_accounts: 30
+      network_id: "*", 
+      total_accounts: 30,
+      websocket: true      
     },
+    dashboard: {
+      port: 3000,
+      hoost: "127.0.0.1"
+    }
+    
   },
   
   contracts_build_directory: './build/abis/',
@@ -22,6 +28,7 @@ module.exports = {
     }
   }
 }
+
 
 /**
  * Use this file to configure your truffle project. It's seeded with some

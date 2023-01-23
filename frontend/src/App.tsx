@@ -35,6 +35,7 @@ function App() {
         </div>
       </Tabs> */}
       <div>
+        <Header/>
         <Login componentName="LoginComponent" />
       </div>
     </div>

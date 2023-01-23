@@ -6,19 +6,19 @@
     "external_url": "https://github.com/devendra-wanjara-ey/testrepo",
     "attributes": [
         {
-            "trait_type": "name",
+            "trait_type": "Name",
             "value": "Mr. Joe"
         },
         {
-            "trait_type": "empId",
+            "trait_type": "EmpId",
             "value": 22
         },
         {
-            "trait_type": "primarySkill",
+            "trait_type": "Primary Skill",
             "value": "Cloud"
         },
         {
-            "trait_type": "secondarySkill",
+            "trait_type": "Secondary Skill",
             "value": "Micro Services"
         },
         {

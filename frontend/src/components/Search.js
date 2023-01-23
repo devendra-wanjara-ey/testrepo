@@ -11,7 +11,7 @@ function Search() {
   const [ntfs, setNfts] = useState([]);
   const [loading, setLoading] = useState(true);
   const isValid = Web3.utils.isAddress(address);
-  const SMART_CONTRACT = "0x841A24C7a9B5454b7Ef5C389beD96C11e2F9Ed1E";
+  const SMART_CONTRACT = "0x4080867b3941dC20977828025326B6364F2Be70B";
   const TEST_NETWORK = "http://127.0.0.1:9545/";
 
   const [searchText, setSearchText] = useState("");
