@@ -112,19 +112,20 @@ function App1() {
               {ntfs.map(nft =>
                  <div className='col-4 border'>
                   <h5>#{nft.tokenId}</h5>                
-                  <Card   >
+                  <Card className={Number(nft.tokenId)%2 ? 'card_0' : 'card_1'}>
                     <Card.Img  src={nft.image} style={{width:200, height:200 ,alignSelf:'center'}} />
                     <Card.Body>
                       <Card.Title>Details</Card.Title>
-                      <Card.Text> {
+                      <Card.Text as="div"> {
                                       nft.attributes.map(attr => {
                                         return (
-                                          <ui>
+                                         <div>
                                             <li>Name: {attr[0].name}</li>
-                                            <li> Id: {attr[0].empId}</li>                            
-                                            <li>Skils : {attr[0].primarySkill} {attr[0].secondarySkill}</li>                            
+                                            <li> Id: {attr[0].empId}</li>
+                                            <li>Skils : {attr[0].primarySkill} {attr[0].secondarySkill}</li>
                                             <li>Localtion: {attr[0].location}</li>
-                                        </ui>
+                                          </div>
+                                   
                                         );
                                       })
                                     }
