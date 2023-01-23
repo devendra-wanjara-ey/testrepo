@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { useState } from "react";
 import React from "react";
 import { Team2NFTV1Abi } from './Team2NFTV1Abi';
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 declare var window: any;
 
 var contract: Contract | null = null;
@@ -111,7 +112,9 @@ function Minter() {
           params: [params]
       }).then((res: string) => {
           console.log("res >>"+res);
-      });
+      }).catch((error: string) => {
+        console.log("error >>"+error);
+       });
 
       
   }
@@ -124,66 +127,81 @@ function Minter() {
        <div className="Minter" >
        <h1  id="title" className="header-mint">NFT Minter</h1>
      <div  className="header-mint">
+     <Container>  
+          <Button variant="secondary" onClick={() => handleContractChange()}>
+             Connect Wallet  
+          </Button>
+        </Container>
        
-        <button  onClick={() => handleContractChange()}>
-          Connect Wallet  
-        </button>
         <br></br>
         {address.length>0 && 
            <p>Connected to the address: &nbsp;  
-           <b>{address}</b></p>
+           <b style={{color:'blue'}}>{address}</b></p>
         }
       </div>
       <div  className="div-mint">
       <form>
       
       <br></br>
-     
       <p>
         Simply add your name, skills then press "Mint."
       </p>
-     
-       <p>* Name: 
-          &nbsp;<input required className="text"
+
+      <Container style={{width:"700px"}}>
+      <Row>
+        <Col className="label">* Name: </Col>
+        <Col>
+          <input required className="input_text"
           type="text"
           placeholder="e.g. NFT Mr. Doe" value={name}
-          onChange={(e) => setName(e.target.value)}
-        /></p>
-       
-        <p>*Employee ID: 
-          &nbsp;<input required className="text"
+          onChange={(e) => setName(e.target.value)}/>
+        </Col>
+      </Row>
+      <br></br>
+      <Row>
+        <Col className="label">*Employee ID: </Col>
+        <Col>
+          <input required className="input_text"
           type="text"
-          placeholder="XXXXX" value={empId}
-          onChange={(e) => setEmpId(e.target.value)}
-        />
-        </p>
-        
-        <p>Primary Skills: 
-            &nbsp;<input className="text"
+          placeholder="e.g. XXXXX" value={empId}
+          onChange={(e) => setEmpId(e.target.value)}/>
+        </Col>
+      </Row>
+      <br></br>
+      <Row>
+        <Col className="label">Primary Skills: </Col>
+        <Col>
+           <input className="input_text"
           type="text" value ={primarySkill}
-          placeholder="e.g. UI/ Backend " onChange={(e) => setPrimarySkill(e.target.value)}
-        />
-        </p>
-        <p>Secondary Skills: 
-            &nbsp;<input className="text"
+          placeholder="e.g. UI/ Backend " onChange={(e) => setPrimarySkill(e.target.value)}/>
+        </Col>
+      </Row>
+      <br></br>
+      <Row>
+        <Col className="label">Secondary Skills: </Col>
+        <Col>
+          <input className="input_text"
           type="text" value ={secondarySkill}
-          placeholder="e.g. UI/ Backend " onChange={(e) => setSecondarySkill(e.target.value)}
-        />
-        </p>
-
-        <p>Location: 
-            &nbsp;<input className="text"
+          placeholder="e.g. UI/ Backend " onChange={(e) => setSecondarySkill(e.target.value)}/>
+        </Col>
+      </Row>
+      <br></br>
+      <Row>
+        <Col className="label">Location: </Col>
+        <Col>
+        <input className="input_text"
           type="text" value ={location}
-          placeholder="Texas" onChange={(e) => setLocation(e.target.value)}
+          placeholder="e.g. Texas" onChange={(e) => setLocation(e.target.value)}
         />
-        </p>
-  
-        </form>
-       
-        <button id="mint" onClick={() => mint()}>
-          Mint
-        </button>
-   
+        </Col>
+      </Row>
+      </Container>
+    </form>
+        <br></br>
+        <Container>  
+          <Button variant="secondary"onClick={() => mint()}>Mint</Button>
+        </Container>
+      
         </div>
         
     </div>
@@ -193,6 +211,3 @@ function Minter() {
 
 export default Minter;
 
-function axios(url: string): any {
-  throw new Error("Function not implemented.");
-}
