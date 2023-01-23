@@ -119,30 +119,16 @@ function App1() {
                       <Card.Text as="div"> {
                                       nft.attributes.map(attr => {
                                         return (
-<<<<<<< Updated upstream
                                          <div>
-=======
-<<<<<<< Updated upstream
                                          <div>
-=======
                                           <div>
->>>>>>> Stashed changes
->>>>>>> Stashed changes
                                             <li>Name: {attr[0].name}</li>
                                             <li> Id: {attr[0].empId}</li>
                                             <li>Skils : {attr[0].primarySkill} {attr[0].secondarySkill}</li>
                                             <li>Localtion: {attr[0].location}</li>
-<<<<<<< Updated upstream
                                           </div>
-                                   
-=======
-<<<<<<< Updated upstream
                                           </div>
-                                   
-=======
                                         </div>
->>>>>>> Stashed changes
->>>>>>> Stashed changes
                                         );
                                       })
                                     }

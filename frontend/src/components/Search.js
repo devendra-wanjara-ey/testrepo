@@ -36,17 +36,16 @@ function Search() {
           const tokenId = await contract.methods.tokenByIndex(ix).call();
       //console.log("DEBUG2")
           const tokenURI = await contract.methods.tokenURI(tokenId).call();
-          const metadataResponse = await fetch(tokenURI);
-          const metadata = await metadataResponse.json();
-          console.log(metadata);
+          const metadataResponse = await fetch(tokenURI);          
+          const metadata = await metadataResponse.json();          
+          const initialValue = JSON.parse(localStorage.getItem(tokenURI) || '{}');
+          console.log(initialValue);
+          //return initialValue || "";
+          //console.log(metadata);
 
-          const traits = [];
-
-          for (const attribute of metadata.attributes) {
-            //traits[attribute.trait_type] = attribute.value;
-            traits.push({trait_type: attribute.trait_type, value: ' ' + attribute.value });
-          }
-
+          const traits = [];          
+          
+          traits.push([initialValue]);
           newNfts.push({
             tokenId: tokenId,
             name: '',
@@ -132,10 +131,12 @@ function Search() {
                 {
                     d.attributes.map(attr => {
                         return (
-                            <div className="parent-search">
-                                <div>{attr.trait_type}</div>
-                                <div>{attr.value}</div>
-                            </div>
+                        <div className="parent-search">
+                        <li>Name: {attr[0].name}</li>
+                        <li> Id: {attr[0].empId}</li>
+                        <li>Skils : {attr[0].primarySkill} {attr[0].secondarySkill}</li>
+                        <li>Localtion: {attr[0].location}</li>
+                        </div>
                         );
                     })
                 }
